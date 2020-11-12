@@ -19,9 +19,54 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/nextjs-material-kit/components/headerLinksStyle.js";
+import Hidden from "@material-ui/core/Hidden";
 
 const useStyles = makeStyles(styles);
 
+const ListItemCustom = ({
+  href,
+  classListItem,
+  classNavLink,
+  classSocialIcons,
+  classListItemText,
+  classTooltip,
+  icon,
+  text,
+  ...props
+}) => {
+  return (
+    <ListItem className={classListItem}>
+      <Hidden mdUp implementation="js">
+        <Button
+          color="transparent"
+          href={href}
+          target="_blank"
+          className={classNavLink}
+        >
+          <i className={classSocialIcons + ` fab fa-${icon}`} />
+          <span className={classListItemText}>{text}</span>
+        </Button>
+      </Hidden>
+      <Hidden smDown implementation="js">
+        <Tooltip
+          id="instagram-tooltip"
+          title={text}
+          placement={"top"}
+          classes={{ tooltip: classTooltip }}
+        >
+          <Button
+            color="transparent"
+            href={href}
+            target="_blank"
+            className={classNavLink}
+          >
+            <i className={classSocialIcons + ` fab fa-${icon}`} />
+          </Button>
+        </Tooltip>
+      </Hidden>
+    </ListItem>
+  );
+};
 export default function HeaderLinks(props) {
   const classes = useStyles();
   return (
@@ -70,62 +115,39 @@ export default function HeaderLinks(props) {
           <CloudDownload className={classes.icons} /> Download
         </Button>
       </ListItem> */}
-      <ListItem className={classes.listItem}>
-        {/*<Tooltip title="Delete">
-          <IconButton aria-label="Delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>*/}
-        <Tooltip
-          id="instagram-twitter"
-          title="Linkedin"
-          placement={"top"}
-          classes={{ tooltip: classes.tooltip }}
-        >
-          <Button
-            href="https://www.linkedin.com/in/adriano-guzzo"
-            target="_blank"
-            color="transparent"
-            className={classes.navLink}
-          >
-            <i className={classes.socialIcons + " fab fa-linkedin"} />
-          </Button>
-        </Tooltip>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-facebook"
-          title="Facebook"
-          placement={"top"}
-          classes={{ tooltip: classes.tooltip }}
-        >
-          <Button
-            color="transparent"
-            href="https://www.facebook.com/AdrianoGuzzo"
-            target="_blank"
-            className={classes.navLink}
-          >
-            <i className={classes.socialIcons + " fab fa-facebook"} />
-          </Button>
-        </Tooltip>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-tooltip"
-          title="Instagram"
-          placement={"top"}
-          classes={{ tooltip: classes.tooltip }}
-        >
-          <Button
-            color="transparent"
-            href="https://www.instagram.com/adrianoguzzo"
-            target="_blank"
-            className={classes.navLink}
-          >
-            <i className={classes.socialIcons + " fab fa-instagram"} />
-          </Button>
-        </Tooltip>
-      </ListItem>
+      <ListItemCustom
+        href="https://www.linkedin.com/in/adriano-guzzo"
+        classListItem={classes.listItem}
+        classNavLink={classes.navLink}
+        classSocialIcons={classes.socialIcons}
+        classListItemText={classes.listItemText}
+        classTooltip={classes.tooltip}
+        classListItem={classes.listItem}
+        icon="linkedin"
+        text="Linkedin"
+      />
+      <ListItemCustom
+        href="https://www.facebook.com/AdrianoGuzzo"
+        classListItem={classes.listItem}
+        classNavLink={classes.navLink}
+        classSocialIcons={classes.socialIcons}
+        classListItemText={classes.listItemText}
+        classTooltip={classes.tooltip}
+        classListItem={classes.listItem}
+        icon="facebook"
+        text="Facebook"
+      />
+      <ListItemCustom
+        href="https://www.instagram.com/adrianoguzzo"
+        classListItem={classes.listItem}
+        classNavLink={classes.navLink}
+        classSocialIcons={classes.socialIcons}
+        classListItemText={classes.listItemText}
+        classTooltip={classes.tooltip}
+        classListItem={classes.listItem}
+        icon="instagram"
+        text="Instagram"
+      />
     </List>
   );
 }
