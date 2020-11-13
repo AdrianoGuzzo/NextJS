@@ -15,6 +15,8 @@ import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import Parallax from "components/Parallax/Parallax.js";
 // sections for this page
+import profile from "assets/img/faces/Adriano.jpg";
+
 import SectionBasics from "pages-sections/Components-Sections/SectionBasics.js";
 import SectionNavbars from "pages-sections/Components-Sections/SectionNavbars.js";
 import SectionTabs from "pages-sections/Components-Sections/SectionTabs.js";
@@ -29,11 +31,30 @@ import SectionExamples from "pages-sections/Components-Sections/SectionExamples.
 import SectionDownload from "pages-sections/Components-Sections/SectionDownload.js";
 
 import styles from "assets/jss/nextjs-material-kit/pages/components.js";
+import stylesProfile from "assets/jss/nextjs-material-kit/pages/profilePage.js";
 
 const useStyles = makeStyles(styles);
-
+const useStylesProfile = makeStyles(stylesProfile);
+const secondsDiff = (d1, d2) => {
+  let millisecondDiff = d2 - d1;
+  let secDiff = Math.floor((d2 - d1) / 1000);
+  return secDiff;
+};
+const getYearsExperience = () => {
+  let d1 = Date.now();
+  let d2 = new Date(2014, 1, 8).getTime();
+  let seconds = secondsDiff(d2, d1);
+  let minutesDiff = Math.floor(seconds / 60);
+  return Math.floor(minutesDiff / 60 / 24 / 365);
+};
 export default function Components(props) {
   const classes = useStyles();
+  const classesProfile = useStylesProfile();
+  const imageClasses = classNames(
+    classesProfile.imgRaised,
+    classesProfile.imgRoundedCircle,
+    classesProfile.imgFluid
+  );
   const { ...rest } = props;
   return (
     <div>
@@ -62,12 +83,162 @@ export default function Components(props) {
           </GridContainer>
         </div>
       </Parallax>
-
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <h2 style={{ padding: "50px", textAlign: "center" }}>
-          É nois que voa BRUXÃO
-        </h2>
-        {/* <SectionBasics />
+      <div
+        className={classNames(classesProfile.main, classesProfile.mainRaised)}
+      >
+        <div>
+          <div className={classesProfile.container}>
+            <GridContainer justify="center">
+              <GridItem xs={12} sm={12} md={6}>
+                <div className={classesProfile.profile}>
+                  <div>
+                    <img src={profile} alt="..." className={imageClasses} />
+                  </div>
+                  <div className={classesProfile.name}>
+                    <h3 className={classesProfile.title}>Sobre mim</h3>
+                    {/* <h6>DESIGNER</h6>
+                    <Button justIcon link className={classesProfile.margin5}>
+                      <i className={"fab fa-twitter"} />
+                    </Button>
+                    <Button justIcon link className={classesProfile.margin5}>
+                      <i className={"fab fa-instagram"} />
+                    </Button>
+                    <Button justIcon link className={classesProfile.margin5}>
+                      <i className={"fab fa-facebook"} />
+                    </Button> */}
+                  </div>
+                </div>
+              </GridItem>
+            </GridContainer>
+            <div className={classesProfile.description}>
+              <p>
+                Formado em ciência da computação, com {getYearsExperience()}{" "}
+                anos de experiência na área de desenvolvimento de sistemas web
+                de grande porte. Paixão pela minha profissão, amo minha família
+                e nerd de carteirinha.{" "}
+              </p>
+            </div>
+            {/* <GridContainer justify="center">
+              <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
+                <NavPills
+                  alignCenter
+                  color="primary"
+                  tabs={[
+                    {
+                      tabButton: "Studio",
+                      tabIcon: Camera,
+                      tabContent: (
+                        <GridContainer justify="center">
+                          <GridItem xs={12} sm={12} md={4}>
+                            <img
+                              alt="..."
+                              src={studio1}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={studio2}
+                              className={navImageClasses}
+                            />
+                          </GridItem>
+                          <GridItem xs={12} sm={12} md={4}>
+                            <img
+                              alt="..."
+                              src={studio5}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={studio4}
+                              className={navImageClasses}
+                            />
+                          </GridItem>
+                        </GridContainer>
+                      )
+                    },
+                    {
+                      tabButton: "Work",
+                      tabIcon: Palette,
+                      tabContent: (
+                        <GridContainer justify="center">
+                          <GridItem xs={12} sm={12} md={4}>
+                            <img
+                              alt="..."
+                              src={work1}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={work2}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={work3}
+                              className={navImageClasses}
+                            />
+                          </GridItem>
+                          <GridItem xs={12} sm={12} md={4}>
+                            <img
+                              alt="..."
+                              src={work4}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={work5}
+                              className={navImageClasses}
+                            />
+                          </GridItem>
+                        </GridContainer>
+                      )
+                    },
+                    {
+                      tabButton: "Favorite",
+                      tabIcon: Favorite,
+                      tabContent: (
+                        <GridContainer justify="center">
+                          <GridItem xs={12} sm={12} md={4}>
+                            <img
+                              alt="..."
+                              src={work4}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={studio3}
+                              className={navImageClasses}
+                            />
+                          </GridItem>
+                          <GridItem xs={12} sm={12} md={4}>
+                            <img
+                              alt="..."
+                              src={work2}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={work1}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={studio1}
+                              className={navImageClasses}
+                            />
+                          </GridItem>
+                        </GridContainer>
+                      )
+                    }
+                  ]}
+                />
+              </GridItem>
+            </GridContainer> */}
+          </div>
+        </div>
+      </div>
+      {/* <div className={classNames(classes.main, classes.mainRaised)}>        
+        <SectionBasics />
         <SectionNavbars />
         <SectionTabs />
         <SectionPills />
@@ -87,8 +258,8 @@ export default function Components(props) {
           </Link>
         </GridItem>
         <SectionExamples />
-        <SectionDownload /> */}
-      </div>
+        <SectionDownload />
+      </div> */}
       <Footer />
     </div>
   );

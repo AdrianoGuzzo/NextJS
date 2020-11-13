@@ -68,7 +68,7 @@ export default function Footer(props) {
               </a>
             </ListItem>
           </List>
-        </div> */}
+        </div>
         <div className={classes.right}>
           &copy; {1900 + new Date().getYear()} , catei o template, lek!
           {/* <Favorite className={classes.icon} /> by{" "}
@@ -79,8 +79,8 @@ export default function Footer(props) {
           >
             Creative Tim
           </a>{" "}
-          for a better web. */}
-        </div>
+          for a better web. 
+        </div> */}
       </div>
     </footer>
   );
